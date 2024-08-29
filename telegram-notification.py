@@ -47,7 +47,6 @@ now = time.strftime("%a %b %d %H:%M:%S %Z %Y")
 
 # Set paths
 log_file = '{0}/logs/integrations-telegram.log'.format(pwd)
-log_file2 = '{0}/logs/lasttele.log'.format(pwd)
 
 def main(args):
     """
@@ -57,11 +56,7 @@ def main(args):
     alert_file_location = args[1]
     recipients = args[3]
     tokenkey = args[2]
-
-    # debug(alert_file_location)
-    # debug(tokenkey)
-    # debug(recipients)
-
+    
     # Load alert. Parse JSON object.
     with open(alert_file_location) as alert_file:
         json_alert = json.load(alert_file)
@@ -71,22 +66,22 @@ def main(args):
     if msg:
         send_tele(recipients, tokenkey, msg)
     else:
-        debug("Alert tidak dikirim ke telegram karena hanya mengandung informasi")
+        debug("Discard alert, only system information")
 
 def send_tele(recipients, tokenkey, body):
     """
     Send telegram message
     """
-    url = f"http://192.168.100.168:8081/bot{tokenkey}/sendMessage"
+    url = f"https://api.telegram.org/bot{tokenkey}/sendMessage"
     params = {
         'chat_id': recipients,
         'text': body
     }
     response = requests.get(url, params=params)
     if response.status_code == 200:
-        debug("Pesan berhasil dikirim ke telegram chat id:{a}".format(a=recipients))
+        debug("Alert successfully sent to chat id:{a}".format(a=recipients))
     else:
-        debug(f"Terjadi kesalahan: {response.status_code}, {response.text}")
+        debug(f"Error : {response.status_code}, {response.text}")
 
 def debug(msg):
     """
