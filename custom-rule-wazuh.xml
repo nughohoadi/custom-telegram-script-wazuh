@@ -1,0 +1,26 @@
+<!--Web apps file changing -->
+<group name="syscheck,pci_dss_11.5,nist_800_53_SI.7,">
+    <!-- Rules for Linux systems -->
+    <rule id="100170" level="7">
+        <if_sid>550</if_sid>
+        <list field="hostname">etc/lists/webserver_list</list>
+        <field name="file">/var/www/html</field>
+        <description>File modified in web apps folder.</description>
+    </rule>
+    <rule id="100171" level="7">
+        <if_sid>554</if_sid>
+        <list field="hostname">etc/lists/webserver_list</list>
+        <field name="file">/var/www/html</field>
+        <description>File added to web apps folder.</description>
+    </rule>
+    <rule id="100172" level="7">
+        <if_sid>100170</if_sid>
+        <field name="file">.php$|.html$|.htm$|.xml$|.js$|.css$|.sh$|.json$|.env$|.lock$</field>
+        <description>Web file modifications.</description>
+    </rule> 
+    <rule id="100173" level="7">
+        <if_sid>100171</if_sid>
+        <field name="file">.php$|.html$|.htm$|.xml$|.js$|.css$|.sh$|.json$|.env$|.lock$</field>
+        <description>Web file add.</description>
+    </rule> 
+</group>
