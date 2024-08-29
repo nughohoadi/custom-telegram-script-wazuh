@@ -5,4 +5,4 @@ custom-rule-wazuh.xml :
 	this custom rule is used to filter file adding & modification from spesific wazuh agent list that listed as "etc/lists/webserver_list". this rule is wazuh file integrity monitor to detect file adding & modification. this rule only monitor file that exist on path : /var/www/html, and file extention is ; .php .html .htm .xml .js .css .sh .json .env .lock
     
 custom-ossec.conf :
-	this is configuration that need to add to the wazuh configuration (ossec.conf) 
+	this is configuration that need to add to the wazuh configuration (ossec.conf). you have to add the telegram chat id and API token on this configuration.
