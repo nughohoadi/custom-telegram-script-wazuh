@@ -1,5 +1,4 @@
 #!/var/ossec/framework/python/bin/python3
-
 import time
 import os
 import sys
@@ -7,12 +6,15 @@ import json
 import requests
 from requests.auth import HTTPBasicAuth
 
-
 def generate_msg(alert):
     """
     Function that will provide the custom body for the message.
     It takes as input a dictionary object generated from the json alert
     """
+
+    ## in this case I use a syscheck alert and create an alert for specific event
+    ## You can custom this section with alert that you choose
+    
     t = time.strptime(alert['timestamp'].split('.')[0],'%Y-%m-%dT%H:%M:%S')
     timestamp = time.strftime('%c',t)
     fname = alert['syscheck']['path'] if 'path' in alert['syscheck'] else ''
@@ -28,7 +30,7 @@ def generate_msg(alert):
         pname = ''
         execut = ''
 
-    if mode != 'scheduled':
+    if mode != 'scheduled': 
         message = """
         Agent Name : {a}
         \nFile : {b} has been {c} by : {d} at {h}
@@ -39,13 +41,12 @@ def generate_msg(alert):
 
     return message
 
-
 # Additional global vars
 pwd = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 json_alert = {}
 now = time.strftime("%a %b %d %H:%M:%S %Z %Y")
 
-# Set paths
+# Set paths log location
 log_file = '{0}/logs/integrations-telegram.log'.format(pwd)
 
 def main(args):
@@ -62,7 +63,7 @@ def main(args):
         json_alert = json.load(alert_file)
 
     msg = generate_msg(json_alert)
-    #debug(msg)
+
     if msg:
         send_tele(recipients, tokenkey, msg)
     else:
