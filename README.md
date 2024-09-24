@@ -7,5 +7,5 @@
 3. custom-ossec.conf :\
    	this is configuration that need to add to the wazuh configuration (ossec.conf). you have to add the telegram chat id and API token on this configuration.
 
-*always remember to use prefix "custom" for script name, wazuh will not recognize the scrip that without "custom" in the name.
+*always remember to use prefix "custom" for script name, wazuh will not recognize the scrip that without "custom" in the name.\
 You Are Free to use & modify the script
