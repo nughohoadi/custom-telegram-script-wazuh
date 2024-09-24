@@ -1,4 +1,4 @@
-1. telegram-notification.py :\
+1. custom-telegram-notification.py :\
    	a custom script to parse wazuh json alert and then send the alert to telegram chat. this script read argument alert, chat id and token. Put the script under "/var/ossec/integration" folder, don't forget to change the file ownership to 'wazuh' and the chmod +x
     
 3. custom-rule-wazuh.xml :\
@@ -7,4 +7,5 @@
 3. custom-ossec.conf :\
    	this is configuration that need to add to the wazuh configuration (ossec.conf). you have to add the telegram chat id and API token on this configuration.
 
+*always remember to use prefix "custom" for script name, wazuh will not recognize the scrip that without "custom" in the name.
 You Are Free to use & modify the script
