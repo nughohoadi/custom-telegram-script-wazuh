@@ -94,10 +94,6 @@ def debug(msg):
     f.write(msg)
     f.close()
 
-    f = open(log_file2, "w")
-    f.write(now)
-    f.close()
-
 if __name__ == "__main__":
     try:
         # Read arguments
